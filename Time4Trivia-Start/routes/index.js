@@ -5,6 +5,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Time 4 Trivia', user: req.session.user });
 });
 
+
+
 router.get('/leaderboard', function(req, res, next) {
   // TODO: Get actual leader data from the MONGO database!
   let leaders = [

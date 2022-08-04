@@ -3,3 +3,8 @@ extends layout
 block content
     h1 Play Time 4 Trivia!
     button Go
+    ul
+        each val in questions
+            li
+                div
+                    label= val.question
