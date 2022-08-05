@@ -106,3 +106,8 @@ exports.getUserById = function (userId) {
 exports.deleteUserById = function (userId) {
     return sqlDAL.deleteUserById(userId);
 }
+
+
+exports.getAllQuestions = function() {
+    return sqlDAL.getAllQuestions()
+}

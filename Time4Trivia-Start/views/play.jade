@@ -7,4 +7,8 @@ block content
         each val in questions
             li
                 div
-                    label= val.question
+                    label= val.Question
+                    input(type='radio',value ='True', onclick = 'func()')
+                    | True
+                    input(type='radio',value ='False', onclick = 'func()')
+                    | False
