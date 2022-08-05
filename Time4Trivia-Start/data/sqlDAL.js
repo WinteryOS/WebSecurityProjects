@@ -285,3 +285,29 @@ exports.updateUserPassword = async function (userId, hashedPassword) {
         return result;
     }
 }
+
+
+
+exports.getAllQuestions = async function () {
+    let result = new Result();
+
+    const con = await mysql.createConnection(sqlConfig);
+
+    try {
+        let sql = `select * from Questions;`;
+        const questionResult = await con.query(sql);
+
+        console.log(questionResult);
+        result.status = STATUS_CODES.success;
+        result.message = 'Returned All Questions';
+        return questionResult[0];
+    } catch (err) {
+        console.log(err);
+
+        result.status = STATUS_CODES.failure;
+        result.message = err.message;
+        console.log(result);
+        return result;
+
+    }
+}

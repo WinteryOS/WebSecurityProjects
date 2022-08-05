@@ -3,3 +3,12 @@ extends layout
 block content
     h1 Play Time 4 Trivia!
     button Go
+    ul
+        each val in questions
+            li
+                div
+                    label= val.Question
+                    input(type='radio',value ='True', onclick = 'func()')
+                    | True
+                    input(type='radio',value ='False', onclick = 'func()')
+                    | False
