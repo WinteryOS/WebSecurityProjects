@@ -2,18 +2,19 @@
 const User = require('../models/user').User;
 const Result = require('../models/result').Result;
 const STATUS_CODES = require('../models/statusCodes').STATUS_CODES;
+const dotenv = require('dotenv').config();
 
 const mysql = require('mysql2/promise');
 const sqlConfig = {
-    host: 'localhost',
-    user: 'kolby',
-    password: 'kolby123',
-    database: 'Time4Trivia',
-    multipleStatements: true
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
+    multipleStatements: false
 };
 
 /**
- * @returns and array of user models
+ * @returns an array of user models
  */
 exports.getAllUsers = async function () {
     users = [];
@@ -24,9 +25,6 @@ exports.getAllUsers = async function () {
         let sql = `select * from Users;`;
 
         const [userResults, ] = await con.query(sql);
-
-        // console.log('getAllUsers: user results');
-        // console.log(userResults);
 
         for(key in userResults){
             let u = userResults[key];
