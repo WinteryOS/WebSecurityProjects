@@ -4,12 +4,17 @@ const Result = require('../models/result').Result;
 const STATUS_CODES = require('../models/statusCodes').STATUS_CODES;
 const dotenv = require('dotenv').config();
 
+
 const mysql = require('mysql2/promise');
 const sqlConfig = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
+    // host: process.env.DB_HOST,
+    // user: process.env.DB_USER,
+    // password: process.env.PASSWORD,
+    // database: process.env.DATABASE,
+    host: 'localhost',
+    user: 'kolby',
+    password: 'kolby123',
+    database: 'Time4Trivia',
     multipleStatements: false
 };
 
@@ -297,9 +302,33 @@ exports.getAllQuestions = async function () {
         let sql = `select * from Questions;`;
         const questionResult = await con.query(sql);
 
-        console.log(questionResult);
+        // console.log(questionResult);
         result.status = STATUS_CODES.success;
         result.message = 'Returned All Questions';
+        return questionResult[0];
+    } catch (err) {
+        console.log(err);
+
+        result.status = STATUS_CODES.failure;
+        result.message = err.message;
+        console.log(result);
+        return result;
+
+    }
+}
+
+exports.getAllAnswers = async function () {
+    let result = new Result();
+
+    const con = await mysql.createConnection(sqlConfig);
+
+    try {
+        let sql = `select correct_answer from Questions;`;
+        const questionResult = await con.query(sql);
+        result.status = STATUS_CODES.success;
+        result.message = 'Returned All Answers';
+        
+
         return questionResult[0];
     } catch (err) {
         console.log(err);
