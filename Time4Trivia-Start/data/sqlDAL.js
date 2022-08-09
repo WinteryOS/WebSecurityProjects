@@ -7,15 +7,11 @@ const dotenv = require('dotenv').config();
 
 const mysql = require('mysql2/promise');
 const sqlConfig = {
-    // host: process.env.DB_HOST,
-    // user: process.env.DB_USER,
-    // password: process.env.PASSWORD,
-    // database: process.env.DATABASE,
-    host: 'localhost',
-    user: 'kolby',
-    password: 'kolby123',
-    database: 'Time4Trivia',
-    multipleStatements: false
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
+
 };
 
 /**
