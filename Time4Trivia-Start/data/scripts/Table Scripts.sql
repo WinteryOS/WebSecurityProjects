@@ -13,8 +13,11 @@ create table if not exists Users(
 	Email varchar(100) NOT NULL,
 	PRIMARY KEY (UserId),
 	CONSTRAINT Users_UniqueEmail UNIQUE(Email),
-	CONSTRAINT Users_UniqueUsername UNIQUE(Username)
+	CONSTRAINT Users_UniqueUsername UNIQUE(Username),
+
 );
+ALTER TABLE Users
+ADD Score varchar(100);
 
 create table if not exists Roles(
 	RoleId int NOT NULL AUTO_INCREMENT,

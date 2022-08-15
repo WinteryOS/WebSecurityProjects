@@ -5,13 +5,13 @@ const STATUS_CODES = require('../models/statusCodes').STATUS_CODES;
 const dotenv = require('dotenv').config();
 
 
+
 const mysql = require('mysql2/promise');
 const sqlConfig = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
-
 };
 
 /**
@@ -33,9 +33,6 @@ exports.getAllUsers = async function () {
             let sql = `select UserId, Role from UserRoles ur join Roles r on ur.roleid = r.roleid where ur.UserId = ${u.UserId}`;
             console.log(sql);
             const [roleResults, ] = await con.query(sql);
-
-            // console.log('getAllUsers: role results');
-            // console.log(roleResults);
 
             let roles = [];
             for(key in roleResults){
@@ -334,5 +331,54 @@ exports.getAllAnswers = async function () {
         console.log(result);
         return result;
 
+    }
+}
+
+exports.saveScoreToUser = async function (score, username) {
+    let result = new Result();
+
+    const con = await mysql.createConnection(sqlConfig);
+
+    try {
+        let sql = `UPDATE Users SET Score = ${score} WHERE username = '${username}'`;
+        console.log(sql);
+        const userResult = await con.query(sql);
+        result.status = STATUS_CODES.success;
+        result.message = 'Account updated';
+        console.log('Score Saved to User')
+
+        return result;
+        
+    } catch (err) {
+        console.log(err);
+
+        result.status = STATUS_CODES.failure;
+        result.message = err.message;
+        return result;
+    }
+}
+
+
+exports.getAllScores = async function () {
+        let result = new Result();
+    
+        const con = await mysql.createConnection(sqlConfig);
+    
+        try {
+            let sql = `select username, score from Users where score is not null;`;
+            const scoreResult = await con.query(sql);
+            result.status = STATUS_CODES.success;
+            result.message = 'Returned All Scores';
+            
+    
+            console.log(scoreResult + "this is the score result")
+            return scoreResult[0];
+        } catch (err) {
+            console.log(err);
+    
+            result.status = STATUS_CODES.failure;
+            result.message = err.message;
+            console.log(result);
+            return result;
     }
 }
