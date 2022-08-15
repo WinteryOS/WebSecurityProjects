@@ -1,7 +1,7 @@
 use Time4Trivia;
 
 create table if not exists Questions (
-	QuestionId NOT NULL AUTO_INCREMENT,
+	QuestionId NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Question varchar(100) NOT NULL,
 	correct_answer varchar(100) NOT NULL
 )
