@@ -12,6 +12,8 @@ router.get('/', function(req, res, next) {
 router.get('/leaderboard', async function(req, res, next) {
 
   var scoreArray = await sqlDAL.getAllScores();
+  scoreArray.sort();
+  scoreArray.reverse();
   console.log('this is the scoreArray + ' + scoreArray)
 
   res.render('leaderboard', { title: 'Time 4 Trivia', user: req.session.user, leaders: scoreArray });
