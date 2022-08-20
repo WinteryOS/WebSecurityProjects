@@ -31,7 +31,7 @@ exports.getAllUsers = async function () {
             let u = userResults[key];
 
             let sql = `select UserId, Role from UserRoles ur join Roles r on ur.roleid = r.roleid where ur.UserId = ${u.UserId}`;
-            console.log(sql);
+            //console.log(sql);
             const [roleResults, ] = await con.query(sql);
 
             let roles = [];
@@ -70,7 +70,7 @@ exports.getAllUsers = async function () {
             let u = userResults[key];
 
             let sql = `select UserId, Role from UserRoles ur join Roles r on ur.roleid = r.roleid where ur.UserId = ${u.UserId}`;
-            console.log(sql);
+            //console.log(sql);
             const [roleResults, ] = await con.query(sql);
 
             // console.log('getAllUsers: role results');
@@ -110,7 +110,7 @@ exports.getUserById = async function (userId) {
             let u = userResults[key];
 
             let sql = `select UserId, Role from UserRoles ur join Roles r on ur.roleid = r.roleid where ur.UserId = ${u.UserId}`;
-            console.log(sql);
+            //console.log(sql);
             const [roleResults, ] = await con.query(sql);
 
             let roles = [];
@@ -167,7 +167,7 @@ exports.getUserByUsername = async function (username) {
 
     try {
         let sql = `select * from Users where Username = '${username}'`;
-        console.log(sql);
+        //console.log(sql);
         
         const [userResults, ] = await con.query(sql);
 
@@ -175,7 +175,7 @@ exports.getUserByUsername = async function (username) {
             let u = userResults[key];
 
             let sql = `select UserId, Role from UserRoles ur join Roles r on ur.roleid = r.roleid where ur.UserId = ${u.UserId}`;
-            console.log(sql);
+            //console.log(sql);
             const [roleResults, ] = await con.query(sql);
 
             let roles = [];
@@ -341,7 +341,7 @@ exports.saveScoreToUser = async function (score, username) {
 
     try {
         let sql = `UPDATE Users SET Score = ${score} WHERE username = '${username}'`;
-        console.log(sql);
+        //console.log(sql);
         const userResult = await con.query(sql);
         result.status = STATUS_CODES.success;
         result.message = 'Account updated';
