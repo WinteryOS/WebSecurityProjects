@@ -7,7 +7,9 @@ var logger = require('morgan');
 var session = require('express-session');
 var sessionConfig = {
   secret: 'chunky bulldog',
-  cookie: {}
+  cookie: {},
+  resave: true,
+  saveUninitialized: false
 }
 
 var indexRouter = require('./routes/index');
